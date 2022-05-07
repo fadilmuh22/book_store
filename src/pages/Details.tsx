@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Accordion, Container, Row } from "react-bootstrap";
+import { Accordion, Container, Row, Button } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Book } from "../reducer/BookReducer";
 
@@ -15,6 +15,18 @@ export const Details: React.FC = () => {
 
     return (
         <Container className="Details my-4 justify-content-center">
+            <Button
+                onClick={() => {
+                    navigate('/');
+                }}
+                variant="light"
+                className="d-flex justify-content-center align-content-center mb-3"
+                style={{ backgroundColor: '#f5f5f5' }}
+            >
+                <span className="material-symbols-outlined text-decoration-none" style={{ color: 'black', fontSize: '36px' }}>
+                    chevron_left
+                </span>
+            </Button>
             {
                 location.state === null
                     ? <div className='mx-auto'>
