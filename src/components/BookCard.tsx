@@ -3,8 +3,8 @@ import { Book } from "../reducer/BookReducer";
 
 export const BookCard: React.FC<{ book: Book, bookmarked: Boolean, onBookmark: (ob: Book) => void }> = ({ book, bookmarked, onBookmark }) => {
     return (
-        <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src={book.cover_url} />
+        <Card>
+            <Card.Img className="mh-50" variant="top" src={book.cover_url} />
             <Card.Body>
                 <Card.Title>{book.title}</Card.Title>
                 <Card.Text className="card-description">

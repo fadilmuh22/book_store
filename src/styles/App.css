@@ -19,7 +19,7 @@
 
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .pagination-button > span {
@@ -39,4 +39,18 @@
   overflow: hidden;
   max-height: 5.2em;
   line-height: 1.8em;
+}
+
+.dropdown-category {
+  min-width: 10rem;
+  position: relative;
+}
+
+.dropdown-category > button {
+  max-width: 14rem;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  line-break: normal;
 }

@@ -8,11 +8,7 @@ export const ShimmerCard: React.FC = () => {
                 <div className="shimmerBG content-line m-t-24"></div>
                 <div className="shimmerBG content-line"></div>
                 <div className="shimmerBG content-line end"></div>
-
-                <div className="d-flex justify-content-between">
-                    <div className="shimmerBG title-line w-25"></div>
-                    <div className="shimmerBG title-line w-25"></div>
-                </div>
+                <div className="shimmerBG title-line w-25 mt-4"></div>
             </div>
         </div>
     );
