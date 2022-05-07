@@ -54,3 +54,7 @@
   overflow: hidden;
   line-break: normal;
 }
+
+.card-title:hover {
+  text-decoration: underline;
+}
