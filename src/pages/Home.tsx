@@ -6,7 +6,7 @@ import http from '../utils/http-common';
 import { BookReducer, Category } from '../reducer/BookReducer';
 
 import { BookCard } from '../components/BookCard';
-import { FilterDropdown } from '../components/CategoryDropdown';
+import { FilterDropdown } from '../components/FilterDropdown';
 import { ShimmerCard } from '../components/ShimmerCard';
 
 import '../styles/Home.css';
@@ -22,6 +22,7 @@ export const Home: React.FC = () => {
   const [bookmarkedOnly, setBookmarkedOnly] = useState(false);
   const [loadingBooks, setLoadingBooks] = useState(false);
   const [searchValue, setSearchValue] = useState('');
+  const [isLastPage, setIsLastPage] = useState(false);
 
   useEffect(() => {
     parseQueryString(searchParams);
@@ -108,8 +109,11 @@ export const Home: React.FC = () => {
     return new Promise<void>(async (resolve, reject) => {
       try {
         setLoadingBooks(true);
+        setIsLastPage(false);
 
         const res = await http.get('/fee-assessment-books', { params: { categoryId, page, size: 8 } });
+
+        console.log("masuk " + JSON.stringify(res.data));
 
         if (searchValue !== '') {
           console.log(searchValue)
@@ -124,15 +128,23 @@ export const Home: React.FC = () => {
 
         setTimeout(() => {
           setLoadingBooks(false);
+          parseQueryString(0);
         }, 500);
-
-        parseQueryString(0);
 
         resolve();
       } catch (error) {
-        console.log(error);
+        if (error.response.data === '' && page > 1) {
+          setIsLastPage(true);
+        }
         reject();
       }
+
+      setTimeout(() => {
+        setLoadingBooks(false);
+        parseQueryString(0);
+      }, 500);
+
+      resolve();
 
     });
 
@@ -198,6 +210,16 @@ export const Home: React.FC = () => {
             })}
         </Row>
 
+        {
+          isLastPage
+            ? (
+              <div className='mx-auto mt-5'>
+                <h5 className='text-center'>Telah Mencapai Page Terakhir</h5>
+              </div>
+            )
+            : <></>
+        }
+
       </div>
 
       <div className='pagination-button-container mt-5'>
@@ -224,7 +246,7 @@ export const Home: React.FC = () => {
             updatedSearchParams?.set('page', (page + 1).toString());
             setSearchParams(updatedSearchParams.toString());
           }}
-          disabled={bookmarkedOnly}
+          disabled={bookmarkedOnly || isLastPage}
           className="pagination-button">
           Next
           <span className="material-symbols-outlined">

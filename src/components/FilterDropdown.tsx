@@ -19,7 +19,7 @@ const FilterMenu = React.forwardRef<HTMLDivElement, FilterMenuProps>(
     ({ children, style, className, 'aria-labelledby': labeledBy, categories }, ref) => {
         const [searchParams, setSearchParams] = useSearchParams();
         const [bookmarkedOnly, setBookmarkedOnly] = useState(false);
-        const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
+        const [selectedCategory, setSelectedCategory] = useState<Category | null>(categories[0]);
         const [searchValue, setSearchValue] = useState('');
 
         useEffect(() => {
