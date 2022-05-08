@@ -40,7 +40,7 @@ export const Home: React.FC = () => {
 
     getBooks(selectedCategory?.id!, page);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bookmarkedOnly]);
+  }, [bookmarkedOnly, searchValue]);
 
   useEffect(() => {
     setLoadingBooks(true);
@@ -116,7 +116,6 @@ export const Home: React.FC = () => {
         console.log("masuk " + JSON.stringify(res.data));
 
         if (searchValue !== '') {
-          console.log(searchValue)
           let regexBook = new RegExp(searchValue, 'i');
 
           dispatch({
